@@ -1,64 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Set 10</title>
+    <style>
+        table, td, th {
+            border: 1px solid black;
+            width: 35%;
+            text-align: center;
+            background-color: lightgreen;
+        }
+        table { margin: auto; }
+        input, p { text-align: right; color: blue; }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+            white-space: pre-wrap; /* Allows wrapping */
+            word-wrap: break-word; /* Prevents overflow */
+            color: #333;
+        }
+    </style>
 </head>
 <body>
 
-<!-- Simple Calculator Section -->
+<!-- Simple Calculator Program -->
 <h2>SIMPLE CALCULATOR</h2>
-<form method="post" action="set10.html">
-<table>
-<tr>
-<td>First Number:</td><td><input type="text" name="num1" /></td>
-<td rowspan="2"><button type="submit" name="submit" value="calculate">Calculate</button></td></tr>
-<tr>
-<td>Second Number:</td><td><input type="text" name="num2"/></td>
-</tr>
-</table>
+<form method="post" action="">
+    <table>
+        <tr>
+            <td>First Number:</td><td><input type="text" name="num1" /></td>
+        </tr>
+        <tr>
+            <td>Second Number:</td><td><input type="text" name="num2"/></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit" name="submit" value="calculate">Calculate</button></td>
+        </tr>
+    </table>
 </form>
 
-<?php
-if(isset($_POST['submit'])) { // Check if submit is clicked
+<h3>PHP Code for Calculator:</h3>
+<pre>
+&lt;?php
+if (isset($_POST['submit'])) {
     $num1 = $_POST['num1'];
     $num2 = $_POST['num2'];
-    if(is_numeric($num1) && is_numeric($num2)) {
-        echo "<table><tr><td> Addition :</td><td><p>" . ($num1 + $num2) . "</p></td></tr>";
-        echo "<tr><td> Subtraction :</td><td><p>" . ($num1 - $num2) . "</p></td></tr>";
-        echo "<tr><td> Multiplication :</td><td><p>" . ($num1 * $num2) . "</p></td></tr>";
-        echo "<tr><td> Division :</td><td><p>" . ($num1 / $num2) . "</p></td></tr></table>";
+    if (is_numeric($num1) && is_numeric($num2)) {
+        echo "&lt;table&gt;";
+        echo "&lt;tr&gt;&lt;td&gt; Addition :&lt;/td&gt;&lt;td&gt;&lt;p&gt;" . ($num1 + $num2) . "&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;";
+        echo "&lt;tr&gt;&lt;td&gt; Subtraction :&lt;/td&gt;&lt;td&gt;&lt;p&gt;" . ($num1 - $num2) . "&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;";
+        echo "&lt;tr&gt;&lt;td&gt; Multiplication :&lt;/td&gt;&lt;td&gt;&lt;p&gt;" . ($num1 * $num2) . "&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;";
+        echo "&lt;tr&gt;&lt;td&gt; Division :&lt;/td&gt;&lt;td&gt;&lt;p&gt;" . ($num1 / $num2) . "&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;";
+        echo "&lt;/table&gt;";
     } else {
-        echo "<script> alert('ENTER VALID NUMBERS');</script>";
+        echo "&lt;script&gt; alert('ENTER VALID NUMBER');&lt;/script&gt;";
     }
 }
-?>
+?&gt;
+</pre>
 
-<!-- State Names Comparison Section -->
+<!-- State Name Program -->
 <h2>State Names Comparison</h2>
-<?php
+
+<h3>PHP Code for State Names:</h3>
+<pre>
+&lt;?php
 $states = "Mississippi Alabama Texas Massachusetts Kansas";
 $b = explode(' ', $states);
-echo "<br>ORIGINAL ARRAY :<br>";
-foreach ($b as $i => $value)
-    echo "states[$i] = $value<br>";
+echo "&lt;br&gt;&lt;strong&gt;Original Array:&lt;/strong&gt;&lt;br&gt;";
+foreach ($b as $i =&gt; $value)
+    echo "states[$i] = $value&lt;br&gt;";
 
 foreach ($b as $c) {
     $n = strlen($c);
-    if($c[$n-1] == 's' && $c[$n-2] == 'a' && $c[$n-3] == 'x') 
-        $d[0] = $c;
-    if($c[0] == 'K' && $c[$n-1] == 's') 
-        $d[1] = $c;
-    if($c[0] == 'M' && $c[$n-1] == 's') 
-        $d[2] = $c;
-    if($c[$n-1] == 'a') 
-        $d[3] = $c;
+    if ($c[$n - 1] == 's' && $c[$n - 2] == 'a' && $c[$n - 3] == 'x') $d[0] = $c;
+    if ($c[0] == 'K' && $c[$n - 1] == 's') $d[1] = $c;
+    if ($c[0] == 'M' && $c[$n - 1] == 's') $d[2] = $c;
+    if ($c[$n - 1] == 'a') $d[3] = $c;
 }
-echo "<br>RESULTANT ARRAY :<br>";
-for ($i = 0; $i < count($d); $i++)
-    echo "statesList[$i] = $d[$i]<br>";
-?>
+
+echo "&lt;br&gt;&lt;strong&gt;Resultant Array:&lt;/strong&gt;&lt;br&gt;";
+for ($i = 0; $i &lt; count($d); $i++)
+    echo "statesList[$i] = $d[$i]&lt;br&gt;";
+?&gt;
+</pre>
 
 </body>
 </html>
+

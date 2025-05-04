@@ -1,44 +1,61 @@
 <html>
+
 <head>
     <style>
-        table, td, th {
+        table,
+        td,
+        th {
             border: 1px solid black;
             width: 35%;
             text-align: center;
             background-color: lightgreen;
         }
-        table { margin: auto; }
-        input, p { text-align: right; color: blue; }
+
+        table {
+            margin: auto;
+        }
+
+        input,
+        p {
+            text-align: right;
+            color: blue;
+        }
+
         pre {
             background-color: #f4f4f4;
             padding: 10px;
             border: 1px solid #ddd;
-            white-space: pre-wrap; /* Allows wrapping */
-            word-wrap: break-word; /* Prevents overflow */
+            white-space: pre-wrap;
+            /* Allows wrapping */
+            word-wrap: break-word;
+            /* Prevents overflow */
             color: #333;
         }
     </style>
 </head>
+
 <body>
 
-<!-- Simple Calculator Program -->
-<h2>SIMPLE CALCULATOR</h2>
-<form method="post" action="">
-    <table>
-        <tr>
-            <td>First Number:</td><td><input type="text" name="num1" /></td>
-        </tr>
-        <tr>
-            <td>Second Number:</td><td><input type="text" name="num2"/></td>
-        </tr>
-        <tr>
-            <td colspan="2"><button type="submit" name="submit" value="calculate">Calculate</button></td>
-        </tr>
-    </table>
-</form>
+    <!-- Simple Calculator Program -->
+    <h2>SIMPLE CALCULATOR</h2>
+    <form method="post" action="">
+        <table>
+            <tr>
+                <td>First Number:</td>
+                <td><input type="text" name="num1" /></td>
+            </tr>
+            <tr>
+                <td>Second Number:</td>
+                <td><input type="text" name="num2" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit" name="submit" value="calculate">Calculate</button></td>
+            </tr>
+        </table>
+    </form>
 
-<h3>PHP Code for Calculator:</h3>
-<pre>
+    <h3>PHP Code for Calculator:</h3>
+    <pre>
 &lt;?php
 if (isset($_POST['submit'])) {
     $num1 = $_POST['num1'];
@@ -57,11 +74,11 @@ if (isset($_POST['submit'])) {
 ?&gt;
 </pre>
 
-<!-- State Name Program -->
-<h2>State Names Comparison</h2>
+    <!-- State Name Program -->
+    <h2>State Names Comparison</h2>
 
-<h3>PHP Code for State Names:</h3>
-<pre>
+    <h3>PHP Code for State Names:</h3>
+    <pre>
 &lt;?php
 $states = "Mississippi Alabama Texas Massachusetts Kansas";
 $b = explode(' ', $states);
@@ -84,5 +101,7 @@ for ($i = 0; $i &lt; count($d); $i++)
 </pre>
 
 </body>
+
 </html>
+
 

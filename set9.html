@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set 9 - Lab Internals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .formstyle {
+            width: 300px;
+            height: 530px;
+            margin: auto;
+            border: 3px solid skyblue;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        input {
+            width: 20px;
+            background-color: green;
+            color: white;
+            border: 3px solid gray;
+            border-radius: 5px;
+            padding: 26px;
+            margin: 5px;
+            font-size: 15px;
+        }
+
+        #clear {
+            width: 270px;
+            border: 3px solid gray;
+            border-radius: 3px;
+            padding: 20px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Set 9 - Lab Internals</h1>
+
+    <!-- Question 1: Calculator Program -->
+    <h2>Q1) JavaScript Calculator</h2>
+    <pre>
+  &lt;!DOCTYPE html&gt;
+  &lt;html lang = "en"&gt;
+  &lt;head&gt;
+  &lt;title&gt; JavaScript Calculator &lt;/title&gt;
+  &lt;style&gt;
+  h1 {
+    text-align: center;
+    padding: 23px;
+    background-color: skyblue;
+    color: white;
+  }
+  #clear{
+    width: 270px;
+    border: 3px solid gray;
+    border-radius: 3px;
+    padding: 20px;
+    background-color: red;
+  }
+
+  .formstyle {
+    width: 300px;
+    height: 530px;
+    margin: auto;
+    border: 3px solid skyblue;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  input {
+    width: 20px;
+    background-color: green;
+    color: white;
+    border: 3px solid gray;
+    border-radius: 5px;
+    padding: 26px;
+    margin: 5px;
+    font-size: 15px;
+  }
+  #calc{
+    width: 250px;
+    border: 5px solid black;
+    border-radius: 3px;
+    padding: 20px;
+    margin: auto;
+  }
+  &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;h1&gt; Calculator Program in JavaScript &lt;/h1&gt;
+  &lt;div class= "formstyle"&gt;
+  &lt;form name = "form1"&gt;
+  &lt;!-- This input box shows the button pressed by the user in calculator. --&gt;
+  &lt;input id = "calc" type ="text" name = "answer"&gt; &lt;br&gt; &lt;br&gt;
+  &lt;!-- Display the calculator button on the screen. --&gt;
+  &lt;!-- onclick() function display the number pressed by the user. --&gt;
+  &lt;input type = "button" value = "1" onclick = "form1.answer.value += '1' "&gt;
+  &lt;input type = "button" value = "2" onclick = "form1.answer.value += '2' "&gt;
+  &lt;input type = "button" value = "3" onclick = "form1.answer.value += '3' "&gt;
+  &lt;input type = "button" value = "+" onclick = "form1.answer.value += '+' "&gt;
+  &lt;br&gt; &lt;br&gt;
+  &lt;input type = "button" value = "4" onclick = "form1.answer.value += '4' "&gt;
+  &lt;input type = "button" value = "5" onclick = "form1.answer.value += '5' "&gt;
+  &lt;input type = "button" value = "6" onclick = "form1.answer.value += '6' "&gt;
+  &lt;input type = "button" value = "-" onclick = "form1.answer.value += '-' "&gt;
+  &lt;br&gt; &lt;br&gt;
+  &lt;input type = "button" value = "7" onclick = "form1.answer.value += '7' "&gt;
+  &lt;input type = "button" value = "8" onclick = "form1.answer.value += '8' "&gt;
+  &lt;input type = "button" value = "9" onclick = "form1.answer.value += '9' "&gt;
+  &lt;input type = "button" value = "*" onclick = "form1.answer.value += '*' "&gt;
+  &lt;br&gt; &lt;br&gt;
+  &lt;input type = "button" value = "/" onclick = "form1.answer.value += '/' "&gt;
+  &lt;input type = "button" value = "0" onclick = "form1.answer.value += '0' "&gt;
+  &lt;input type = "button" value = "." onclick = "form1.answer.value += '.' "&gt;
+  &lt;!-- When we click on the '=' button, the onclick() shows the sum results on the calculator
+  screen. --&gt;
+  &lt;input type = "button" value = "=" onclick = "form1.answer.value =
+  eval(form1.answer.value) "&gt;
+  &lt;br&gt;
+  &lt;!-- Display the Cancel button and erase all data entered by the user. --&gt;
+  &lt;input type = "button" value = "Clear All" onclick = "form1.answer.value = ' ' " id= "clear"&gt;
+  &lt;br&gt;
+  &lt;/form&gt;
+  &lt;/div&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+  </pre>
+
+    <!-- Question 2: AngularJS Student Information Form -->
+    <h2>Q2) Student Information Form using AngularJS</h2>
+    <pre>
+  &lt;!DOCTYPE html&gt;
+  &lt;html lang="en"&gt;
+  &lt;script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"&gt;&lt;/script&gt;
+  &lt;body&gt;
+  &lt;h1&gt;student Information&lt;/h1&gt;
+  &lt;div ng-app="myApp" ng-controller="formCtrl"&gt;
+  &lt;form novalidate&gt;
+  First Name:&lt;br&gt;
+  &lt;input type="text" ng-model="student.firstName"&gt;&lt;br&gt;
+  Last Name:&lt;br&gt;
+  &lt;input type="text" ng-model="student.lastName"&gt;&lt;br&gt;
+  DoB:&lt;br&gt;
+  &lt;input type="date" id="dob" ng-model="student.DoB"&gt;&lt;br&gt;
+  Gender:&lt;br&gt;
+  &lt;select id="gender" ng-model="student.gender"&gt;
+  &lt;option value="male"&gt;Male&lt;/option&gt;
+  &lt;option value="female"&gt;Female&lt;/option&gt;
+  &lt;/select&gt;&lt;br&gt;
+  Training Type:&lt;br&gt;
+  &lt;label&gt;&lt;input value="online" type="radio" name="training" ngmodel="
+  student.trainingType" /&gt;Online&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input value="onsite" type="radio" name="training" ngmodel="
+  student.trainingType" /&gt;OnSite&lt;/label&gt;&lt;br&gt;
+  Subjects:&lt;br&gt;
+  &lt;label&gt;&lt;input type="checkbox" ng-model="student.maths" /&gt;Maths&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type="checkbox" ng-model="student.physics" /&gt;Physics&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type="checkbox" ng-model="student.chemistry"/&gt;Chemistry&lt;/label&gt;&lt;br&gt;
+  &lt;br&gt;&lt;br&gt;
+  &lt;button type="button" onclick="alert('student saved successfully')"&gt;SUBMIT&lt;/button&gt;
+  &lt;button ng-click="reset()"&gt;RESET&lt;/button&gt;
+  &lt;/form&gt;
+  16-FULL STACK WEB DEVELOPMENT LAB
+  &lt;p&gt;form = {{student}}&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+  var app = angular.module('myApp', []);
+  app.controller('formCtrl', function($scope) {
+  $scope.master = {};
+  $scope.reset = function() {
+  $scope.student = angular.copy($scope.master);
+  };
+  $scope.reset();
+  });
+  &lt;/script&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+  </pre>
+
+</body>
+
+</html>

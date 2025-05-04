@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set 10</title>
+</head>
+<body>
+
+<!-- Simple Calculator Section -->
+<h2>SIMPLE CALCULATOR</h2>
+<form method="post" action="set10.html">
+<table>
+<tr>
+<td>First Number:</td><td><input type="text" name="num1" /></td>
+<td rowspan="2"><button type="submit" name="submit" value="calculate">Calculate</button></td></tr>
+<tr>
+<td>Second Number:</td><td><input type="text" name="num2"/></td>
+</tr>
+</table>
+</form>
+
+<?php
+if(isset($_POST['submit'])) { // Check if submit is clicked
+    $num1 = $_POST['num1'];
+    $num2 = $_POST['num2'];
+    if(is_numeric($num1) && is_numeric($num2)) {
+        echo "<table><tr><td> Addition :</td><td><p>" . ($num1 + $num2) . "</p></td></tr>";
+        echo "<tr><td> Subtraction :</td><td><p>" . ($num1 - $num2) . "</p></td></tr>";
+        echo "<tr><td> Multiplication :</td><td><p>" . ($num1 * $num2) . "</p></td></tr>";
+        echo "<tr><td> Division :</td><td><p>" . ($num1 / $num2) . "</p></td></tr></table>";
+    } else {
+        echo "<script> alert('ENTER VALID NUMBERS');</script>";
+    }
+}
+?>
+
+<!-- State Names Comparison Section -->
+<h2>State Names Comparison</h2>
+<?php
+$states = "Mississippi Alabama Texas Massachusetts Kansas";
+$b = explode(' ', $states);
+echo "<br>ORIGINAL ARRAY :<br>";
+foreach ($b as $i => $value)
+    echo "states[$i] = $value<br>";
+
+foreach ($b as $c) {
+    $n = strlen($c);
+    if($c[$n-1] == 's' && $c[$n-2] == 'a' && $c[$n-3] == 'x') 
+        $d[0] = $c;
+    if($c[0] == 'K' && $c[$n-1] == 's') 
+        $d[1] = $c;
+    if($c[0] == 'M' && $c[$n-1] == 's') 
+        $d[2] = $c;
+    if($c[$n-1] == 'a') 
+        $d[3] = $c;
+}
+echo "<br>RESULTANT ARRAY :<br>";
+for ($i = 0; $i < count($d); $i++)
+    echo "statesList[$i] = $d[$i]<br>";
+?>
+
+</body>
+</html>

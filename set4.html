@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set 4 - Lab Internals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Set 4 - Lab Internals</h1>
+
+    <!-- Question 1 -->
+    <h2>Q1) Growing and Shrinking Text</h2>
+    <pre>
+  &lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+  &lt;body&gt;
+  &lt;div id="h"&gt;&lt;/div&gt;
+  &lt;script&gt;
+  var v = 0, f = 1, t = "TEXT-GROWING", color;
+
+  function a() {
+      if (f == 1) {
+          v += 5;
+          color = "red";
+      } else {
+          v -= 5;
+          color = "blue";
+      }
+
+      document.getElementById("h").innerHTML =
+          "&lt;h1 style='font-size:" + v + "px; margin:0px; color:" + color + "'&gt;&lt;b&gt;" + t + "&lt;/b&gt;&lt;/h1&gt;";
+
+      if (v == 50) {
+          f = 0;
+          t = "TEXT-SHRINKING";
+      }
+      if (v == 5) {
+          f = 1;
+          t = "TEXT-GROWING";
+      }
+
+      setTimeout(a, 100);
+  }
+
+  a();
+  &lt;/script&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+  </pre>
+
+    <!-- Question 2 -->
+    <h2>Q2) jQuery get() Demo for Server Date and Time</h2>
+    <pre>
+  &lt;!DOCTYPE html&gt;
+  &lt;html lang="en"&gt;
+  &lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;jQuery get() Demo&lt;/title&gt;
+  &lt;script src="https://code.jquery.com/jquery-3.5.1.min.js"&gt;&lt;/script&gt;
+  &lt;script&gt;
+  $(document).ready(function(){
+  $("button").click(function(){
+  $.get("date-time.php", function(data){
+  // Display the returned data in browser
+  $("#result").html(data);
+  });
+  });
+  });
+  &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;div id="result"&gt;
+  &lt;h2&gt; The XMLHttpRequest Object by the server date and time&lt;/h2&gt;
+  &lt;button type="button"&gt;Load Date and Time&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+
+  <!-- date-time.php -->
+  &lt;?php
+  // Return current date and time from the server
+  date_default_timezone_set("Asia/Kolkata");
+  echo date("F d, Y h:i:s A");
+  ?&gt;
+  </pre>
+
+</body>
+
+</html>

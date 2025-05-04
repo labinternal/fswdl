@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Set 2 - Lab Tasks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        h1,
+        h2 {
+            color: #2c3e50;
+        }
+
+        pre {
+            background: #fff;
+            padding: 15px;
+            border: 1px solid #ccc;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #2980b9;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Set 2</h1>
+
+    <h2>Question 1: AngularJS Shopping List</h2>
+    <p>Create a shopping list using AngularJS where you can add or remove items from the cart.</p>
+    <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"&gt;&lt;/script&gt;
+&lt;body&gt;
+&lt;script&gt;
+var app = angular.module("myShoppingList", []);
+app.controller("myCtrl", function($scope) {
+  $scope.products = ["Milk", "Bread", "Cheese"];
+  $scope.addItem = function () {
+    $scope.errortext = "";
+    if (!$scope.addMe) return;
+    if ($scope.products.indexOf($scope.addMe) == -1) {
+      $scope.products.push($scope.addMe);
+    } else {
+      $scope.errortext = "The item is already in your shopping list.";
+    }
+  };
+  $scope.removeItem = function (x) {
+    $scope.errortext = "";
+    $scope.products.splice(x, 1);
+  };
+});
+&lt;/script&gt;
+
+&lt;div ng-app="myShoppingList" ng-controller="myCtrl"&gt;
+  &lt;ul&gt;
+    &lt;li ng-repeat="x in products"&gt;{{x}}&lt;span ng-click="removeItem($index)"&gt;×&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;input ng-model="addMe"&gt;
+  &lt;button ng-click="addItem()"&gt;Add&lt;/button&gt;
+  &lt;p&gt;{{errortext}}&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+  </pre>
+
+    <h2>Question 2: Servlet - Mobile Phone Details</h2>
+    <p>Servlet program that accepts mobile phone details and displays them on the next page.</p>
+    <pre>
+Step 1: MySQL Table
+CREATE DATABASE mobile;
+CREATE TABLE MobileDetails (
+    ModelId VARCHAR(20) PRIMARY KEY,
+    Price INT,
+    Company VARCHAR(50),
+    Color VARCHAR(30)
+);
+  </pre>
+
+    <pre>
+index.html
+&lt;form action="/mobile-1.0-SNAPSHOT/MobileDetails" method="post"&gt;
+&lt;fieldset style="width:25%; background-color:blue"&gt;
+  &lt;h2 align="center"&gt;Mobile Details form&lt;/h2&gt;&lt;hr&gt;
+  &lt;table&gt;
+    &lt;tr&gt;&lt;td&gt;Model Number&lt;/td&gt;&lt;td&gt;&lt;input type="text" name="ModelId" required /&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Mobile Price&lt;/td&gt;&lt;td&gt;&lt;input type="text" name="Price" required /&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Mobile Company&lt;/td&gt;&lt;td&gt;&lt;input type="text" name="Company" required /&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Mobile Color&lt;/td&gt;&lt;td&gt;&lt;input type="text" name="Color" required/&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;&lt;input type="reset" value="Reset"/&gt;&lt;/td&gt;&lt;td&gt;&lt;input type="submit" value="Register"/&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/fieldset&gt;
+&lt;/form&gt;
+  </pre>
+
+    <pre>
+MobileDetails.java
+package com.mycompany.mobile;
+import java.io.*;
+import java.sql.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class MobileDetails extends HttpServlet {
+  public void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    response.setContentType("text/html");
+    PrintWriter out = response.getWriter();
+
+    String model = request.getParameter("ModelId");
+    int price = Integer.parseInt(request.getParameter("Price"));
+    String company = request.getParameter("Company");
+    String color = request.getParameter("Color");
+
+    try {
+      Class.forName("com.mysql.jdbc.Driver");
+      Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mobile", "root", "");
+      PreparedStatement ps = con.prepareStatement("insert into MobileDetails values(?,?,?,?)");
+      ps.setString(1, model);
+      ps.setInt(2, price);
+      ps.setString(3, company);
+      ps.setString(4, color);
+      ps.executeUpdate();
+
+      Statement stmt = con.createStatement();
+      ResultSet rs = stmt.executeQuery("SELECT * FROM MobileDetails");
+
+      out.println("&lt;table border=1&gt;&lt;caption&gt;&lt;h2&gt;Mobile Details&lt;/h2&gt;&lt;/caption&gt;");
+      out.println("&lt;tr&gt;&lt;th&gt;Model Id&lt;/th&gt;&lt;th&gt;Price&lt;/th&gt;&lt;th&gt;Company&lt;/th&gt;&lt;th&gt;Color&lt;/th&gt;&lt;/tr&gt;");
+      while (rs.next()) {
+        out.println("&lt;tr&gt;&lt;td&gt;" + rs.getString(1) + "&lt;/td&gt;&lt;td&gt;" + rs.getInt(2) + "&lt;/td&gt;&lt;td&gt;" +
+                    rs.getString(3) + "&lt;/td&gt;&lt;td&gt;" + rs.getString(4) + "&lt;/td&gt;&lt;/tr&gt;");
+      }
+      out.println("&lt;/table&gt;");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+}
+  </pre>
+
+    <pre>
+web.xml
+&lt;web-app version="4.0"&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;MobileDetails&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;com.mycompany.mobile.MobileDetails&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;MobileDetails&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/MobileDetails&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+  </pre>
+
+    <a href="index.html">← Back to Main</a>
+
+</body>
+
+</html>

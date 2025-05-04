@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Set 6 - JavaScript & PHP Programs</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #2c3e50;
+        }
+
+        pre {
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            overflow-x: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Set 6 - Lab Internals</h1>
+
+    <h2>Q1) JavaScript Function to Output the Digits of a Number in Reverse Order</h2>
+    <pre>
+  &lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+  &lt;body&gt;
+  &lt;script&gt;
+  function reverse() {
+    var r, rev = 0, n;
+    n = parseInt(prompt("Enter a number:"));
+    while (n != 0) {
+      r = n % 10;
+      rev = rev * 10 + r;
+      n = parseInt(n / 10);
+    }
+    document.write("Reverse of number is: " + rev);
+  }
+  &lt;/script&gt;
+  &lt;form&gt;
+    &lt;input type="button" value="Reverse" onclick="reverse();" /&gt;
+  &lt;/form&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+  </pre>
+
+    <h2>Q2) PHP Program to Sort Student Records in the Database Using Selection Sort</h2>
+    <pre>
+  &lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+  &lt;head&gt;&lt;/head&gt;
+  &lt;body&gt;
+  &lt;?php
+  $domain = "localhost";
+  $username = "root";
+  $password = "";
+  $dbname = "student";
+  $a = [];
+
+  $conn = mysqli_connect($domain, $username, $password, $dbname);
+  if ($conn-&gt;connect_error)
+      die("Connection failed: " . $conn-&gt;connect_error);
+
+  $sql = "SELECT * FROM studentinfo";
+  $result = $conn-&gt;query($sql);
+
+  echo "&lt;br&gt;&lt;h2&gt;BEFORE SORTING&lt;/h2&gt;";
+  echo "&lt;table border='2'&gt;";
+  echo "&lt;tr&gt;&lt;th&gt;USN&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Address&lt;/th&gt;&lt;/tr&gt;";
+
+  if ($result-&gt;num_rows &gt; 0) {
+      while ($row = $result-&gt;fetch_assoc()) {
+          echo "&lt;tr&gt;&lt;td&gt;{$row['usn']}&lt;/td&gt;&lt;td&gt;{$row['name']}&lt;/td&gt;&lt;td&gt;{$row['address']}&lt;/td&gt;&lt;/tr&gt;";
+          array_push($a, $row["usn"]);
+      }
+  } else {
+      echo "Table is Empty";
+  }
+  echo "&lt;/table&gt;";
+
+  // Selection Sort
+  $n = count($a);
+  for ($i = 0; $i &lt; $n - 1; $i++) {
+      $pos = $i;
+      for ($j = $i + 1; $j &lt; $n; $j++) {
+          if ($a[$pos] &gt; $a[$j])
+              $pos = $j;
+      }
+      if ($pos != $i) {
+          $temp = $a[$i];
+          $a[$i] = $a[$pos];
+          $a[$pos] = $temp;
+      }
+  }
+
+  $c = [];
+  $d = [];
+  $result = $conn-&gt;query($sql);
+  if ($result-&gt;num_rows &gt; 0) {
+      while ($row = $result-&gt;fetch_assoc()) {
+          for ($i = 0; $i &lt; $n; $i++) {
+              if ($row["usn"] == $a[$i]) {
+                  $c[$i] = $row["name"];
+                  $d[$i] = $row["address"];
+              }
+          }
+      }
+  }
+
+  echo "&lt;br&gt;&lt;h2&gt;AFTER SORTING&lt;/h2&gt;";
+  echo "&lt;table border='2'&gt;";
+  echo "&lt;tr&gt;&lt;th&gt;USN&lt;/th&gt;&lt;th&gt;NAME&lt;/th&gt;&lt;th&gt;Address&lt;/th&gt;&lt;/tr&gt;";
+  for ($i = 0; $i &lt; $n; $i++) {
+      echo "&lt;tr&gt;&lt;td&gt;" . $a[$i] . "&lt;/td&gt;&lt;td&gt;" . $c[$i] . "&lt;/td&gt;&lt;td&gt;" . $d[$i] . "&lt;/td&gt;&lt;/tr&gt;";
+  }
+  echo "&lt;/table&gt;";
+  $conn-&gt;close();
+  ?&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+  </pre>
+
+</body>
+
+</html>

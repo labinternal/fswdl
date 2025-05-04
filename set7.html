@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Set 7 - JavaScript & AngularJS Programs</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #2c3e50;
+        }
+
+        pre {
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            overflow-x: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Set 7 - Lab Internals</h1>
+
+    <h2>Q1) JavaScript Program to Calculate Squares and Cubes of Numbers</h2>
+    <pre>
+  &lt;html&gt;
+  &lt;head&gt;&lt;/head&gt;
+  &lt;body&gt;
+  &lt;h2 style="text-align:center;"&gt;The Square & Cubes for 1 - 10&lt;/h2&gt;
+  &lt;table align="center" border=1&gt;
+  &lt;tr&gt;&lt;td&gt;number&lt;/td&gt;&lt;td&gt;square&lt;/td&gt;&lt;td&gt;cube&lt;/td&gt;&lt;/tr&gt;
+  &lt;script type="text/javascript"&gt;
+  for(var n = 0; n <= 10; n++) {
+      document.write("&lt;tr&gt;&lt;td&gt;" + n + "&lt;/td&gt;&lt;td&gt;" + n * n + "&lt;/td&gt;&lt;td&gt;" + n * n * n + "&lt;/td&gt;&lt;/tr&gt;");
+  }
+  &lt;/script&gt;
+  &lt;/table&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+  </pre>
+
+    <h2>Q2) AngularJS Shopping List with Add and Remove Items</h2>
+    <pre>
+  &lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+  &lt;script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"&gt;&lt;/script&gt;
+  &lt;body&gt;
+  &lt;script&gt;
+  var app = angular.module("myShoppingList", []);
+  app.controller("myCtrl", function($scope) {
+    $scope.products = ["Milk", "Bread", "Cheese"];
+    $scope.addItem = function () {
+      $scope.errortext = "";
+      if (!$scope.addMe) { return; }
+      if ($scope.products.indexOf($scope.addMe) == -1) {
+        $scope.products.push($scope.addMe);
+      } else {
+        $scope.errortext = "The item is already in your shopping list.";
+      }
+    };
+    $scope.removeItem = function (x) {
+      $scope.errortext = "";
+      $scope.products.splice(x, 1);
+    };
+  });
+  &lt;/script&gt;
+
+  &lt;div ng-app="myShoppingList" ng-controller="myCtrl"&gt;
+    &lt;ul&gt;
+      &lt;li ng-repeat="x in products"&gt;{{x}}&lt;span ng-click="removeItem($index)"&gt;×&lt;/span&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;input ng-model="addMe"&gt;
+    &lt;button ng-click="addItem()"&gt;Add&lt;/button&gt;
+    &lt;p&gt;{{errortext}}&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;p&gt;Try to add the same item twice, and you will get an error message.&lt;/p&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+  </pre>
+
+</body>
+
+</html>

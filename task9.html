@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Task 9 - JSP Login Validation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .code-block {
+      background: #f4f4f4;
+      padding: 15px;
+      border-left: 3px solid #3498db;
+      overflow-x: auto;
+      margin-bottom: 20px;
+    }
+
+    .execution {
+      background: #e8f4fc;
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 30px;
+    }
+
+    .file-tabs {
+      display: flex;
+      margin-bottom: -1px;
+    }
+
+    .file-tab {
+      padding: 8px 15px;
+      background: #e0e0e0;
+      border: 1px solid #ccc;
+      border-bottom: none;
+      cursor: pointer;
+      border-radius: 5px 5px 0 0;
+      margin-right: 5px;
+    }
+
+    .file-tab.active {
+      background: #f4f4f4;
+      border-bottom: 1px solid #f4f4f4;
+    }
+
+    .file-content {
+      display: none;
+    }
+
+    .file-content.active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Task 9: JSP Login Validation</h1>
+
+  <div class="file-tabs">
+    <div class="file-tab active" onclick="showFile('login')">login.jsp</div>
+    <div class="file-tab" onclick="showFile('forward')">forward.jsp</div>
+    <div class="file-tab" onclick="showFile('welcome')">welcomePage.jsp</div>
+  </div>
+
+  <div id="login" class="file-content active">
+    <pre><code>&lt;%@page contentType="text/html" pageEncoding="UTF-8"%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+    &lt;title&gt;LOGIN PAGE&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form action="forward.jsp" method="post"&gt;
+        &lt;h1&gt;Enter your Credentials!&lt;/h1&gt;
+        &lt;h3&gt;Username: &lt;input type="text" name="uname"/&gt;&lt;/h3&gt;
+        &lt;h3&gt;Password: &lt;input type="password" name="pwd"/&gt;&lt;/h3&gt;
+        &lt;input type="submit" value="SUBMIT"&gt;
+        &lt;input type="reset"/&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+
+  <div id="forward" class="file-content">
+    <pre><code>&lt;%@page contentType="text/html" pageEncoding="UTF-8"%&gt;
+&lt;%@page import="java.io.File"%&gt;
+&lt;%
+    if(request.getParameter("uname").equals("CSE") && 
+       request.getParameter("pwd").equals("griet")) {
+%&gt;
+    &lt;jsp:forward page="welcomePage.jsp"/&gt;
+&lt;% } else { %&gt;
+    &lt;h3 style="color:red;"&gt;Invalid Username or Password&lt;/h3&gt;
+    &lt;%@include file="login.jsp"%&gt;
+&lt;% } %&gt;</code></pre>
+  </div>
+
+  <div id="welcome" class="file-content">
+    <pre><code>&lt;%@page contentType="text/html" pageEncoding="UTF-8"%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+    &lt;title&gt;Welcome Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome to &lt;%= request.getParameter("uname")%&gt;&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+
+  <div class="execution">
+    <h3>How to Execute:</h3>
+    <ol>
+      <li>Create new Java Web Project in NetBeans</li>
+      <li>Create these 3 JSP files in Web Pages folder</li>
+      <li>Right-click project → Run</li>
+      <li>Access via: <code>http://localhost:8080/YourProjectName/login.jsp</code></li>
+      <li>Test with:
+        <ul>
+          <li>Valid: CSE/griet</li>
+          <li>Invalid: Any other combination</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <script>
+    function showFile(fileId) {
+      document.querySelectorAll('.file-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      document.querySelectorAll('.file-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.getElementById(fileId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Task 11 - PHP States</title>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .code {
+            background: #f0f0f0;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Task 11: PHP States Program</h1>
+
+    <div class="code">
+        <pre>&lt;html&gt;
+&lt;body&gt;
+&lt;?php
+$states = "Mississippi Alabama Texas Massachusetts Kansas";
+$b = explode(' ', $states);
+$statesList = array();
+
+// Original logic from your PDF
+foreach ($b as $c) {
+    $n = strlen($c);
+    
+    // a. Ends with xas
+    if($c[$n-1] == 's' && $c[$n-2] == 'a' && $c[$n-3] == 'x') 
+        $statesList[0] = $c;
+    
+    // b. Starts with K/k, ends with s (case-insensitive)
+    if(strtolower($c[0]) == 'k' && strtolower($c[$n-1]) == 's') 
+        $statesList[1] = $c;
+    
+    // c. Starts with M, ends with s
+    if($c[0] == 'M' && $c[$n-1] == 's') 
+        $statesList[2] = $c;
+    
+    // d. Ends with a
+    if($c[$n-1] == 'a') 
+        $statesList[3] = $c;
+}
+
+echo "&lt;pre&gt;";
+print_r($statesList);
+echo "&lt;/pre&gt;";
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    </div>
+
+    <h3>Execution Steps:</h3>
+    <ol>
+        <li>Save as <code>states.php</code> in XAMPP's htdocs folder</li>
+        <li>Start Apache server</li>
+        <li>Access via: <code>http://localhost/states.php</code></li>
+        <li>Output will be:
+            <pre>Array (
+    [0] => Texas
+    [1] => Kansas
+    [2] => Massachusetts
+    [3] => Alabama 
+)</pre>
+        </li>
+    </ol>
+
+    <h3>Key Features (as per PDF):</h3>
+    <ul>
+        <li>Manual string analysis without regex</li>
+        <li>Direct character position checks</li>
+        <li>Case-insensitive comparison for 'K' search</li>
+        <li>Array indices 0-3 for different patterns</li>
+    </ul>
+</body>
+
+</html>

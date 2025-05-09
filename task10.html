@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Task 10 - PHP Calculator</title>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .code {
+            background: #f0f0f0;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Task 10: PHP Calculator</h1>
+
+    <div class="code">
+        <pre>&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+    table,td,th { border:1px solid black; width:35%; background-color:lightgreen; }
+    table { margin:auto; }
+    input,p { text-align:right; color:blue; }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form method="post"&gt;
+&lt;table&gt;
+    &lt;caption&gt;&lt;h2&gt;SIMPLE CALCULATOR&lt;/h2&gt;&lt;/caption&gt;
+    &lt;tr&gt;
+        &lt;td&gt;First Number:&lt;/td&gt;
+        &lt;td&gt;&lt;input type="text" name="num1"&gt;&lt;/td&gt;
+        &lt;td rowspan="2"&gt;&lt;button type="submit" name="submit"&gt;Calculate&lt;/button&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Second Number:&lt;/td&gt;
+        &lt;td&gt;&lt;input type="text" name="num2"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;?php
+    if(isset($_POST['submit'])) {
+        $num1 = $_POST['num1'];
+        $num2 = $_POST['num2'];
+        if(is_numeric($num1) && is_numeric($num2)) {
+            echo "&lt;tr&gt;&lt;td&gt;Addition:&lt;/td&gt;&lt;td&gt;&lt;p&gt;".($num1+$num2)."&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;";
+            echo "&lt;tr&gt;&lt;td&gt;Subtraction:&lt;/td&gt;&lt;td&gt;&lt;p&gt;".($num1-$num2)."&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;";
+            echo "&lt;tr&gt;&lt;td&gt;Multiplication:&lt;/td&gt;&lt;td&gt;&lt;p&gt;".($num1*$num2)."&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;";
+            echo "&lt;tr&gt;&lt;td&gt;Division:&lt;/td&gt;&lt;td&gt;&lt;p&gt;".($num1/$num2)."&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;";
+        }
+    }
+    ?&gt;
+&lt;/table&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    </div>
+
+    <h3>Run:</h3>
+    <ol>
+        <li>Save as <code>calculator.php</code></li>
+        <li>Place in XAMPP htdocs</li>
+        <li>Access via <code>http://localhost/calculator.php</code></li>
+    </ol>
+</body>
+
+</html>

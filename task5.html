@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Task 5 - jQuery AJAX</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .code-block {
+            background: #f4f4f4;
+            padding: 15px;
+            border-left: 3px solid #3498db;
+            overflow-x: auto;
+        }
+
+        .execution {
+            background: #e8f4fc;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <h1>Task 5: jQuery AJAX Request</h1>
+
+    <h2>Working Demo:</h2>
+    <button id="load-btn">Load Server Date and Time</button>
+    <div id="result"></div>
+
+    <h2>Complete Code:</h2>
+    <div class="code-block">
+        <h3>HTML (index.html):</h3>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;jQuery AJAX Demo&lt;/title&gt;
+    &lt;script src="https://code.jquery.com/jquery-3.6.0.min.js"&gt;&lt;/script&gt;
+    &lt;style&gt;
+        button {
+            padding: 10px 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;button id="load-btn"&gt;Load Server Date and Time&lt;/button&gt;
+    &lt;div id="result"&gt;&lt;/div&gt;
+    
+    &lt;script&gt;
+        $(document).ready(function() {
+            $("#load-btn").click(function() {
+                $.get("date-time.php", function(data) {
+                    $("#result").html("&lt;strong&gt;Server Response:&lt;/strong&gt; " + data);
+                });
+            });
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+        <h3>PHP (date-time.php):</h3>
+        <pre><code>&lt;?php
+// Set the timezone to Asia/Kolkata
+date_default_timezone_set("Asia/Kolkata");
+
+// Return current date and time
+echo date("F d, Y h:i:s A");
+?&gt;</code></pre>
+    </div>
+
+    <div class="execution">
+        <h3>How to Execute:</h3>
+        <ol>
+            <li>Create a folder named "task5"</li>
+            <li>Save the HTML code as "index.html" in this folder</li>
+            <li>Save the PHP code as "date-time.php" in the same folder</li>
+            <li>Place the folder on a PHP-enabled server (like XAMPP)</li>
+            <li>Access through the server (e.g., http://localhost/task5/)</li>
+            <li>Click the button to see the server's current date and time</li>
+        </ol>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#load-btn").click(function () {
+                $.get("date-time.php", function (data) {
+                    $("#result").html("<strong>Server Response:</strong> " + data);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

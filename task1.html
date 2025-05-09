@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Task 1 - JavaScript Functions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .code-block {
+      background: #f4f4f4;
+      padding: 15px;
+      border-left: 3px solid #3498db;
+      overflow-x: auto;
+    }
+
+    .execution {
+      background: #e8f4fc;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Task 1: JavaScript Functions</h1>
+
+  <h2>Task 1a: Find Left-Most Vowel Position</h2>
+  <div class="code-block">
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;script&gt;
+    function findVowelPosition() {
+        const str = prompt("Enter a string:");
+        const vowels = ['a', 'e', 'i', 'o', 'u'];
+        
+        for(let i = 0; i &lt; str.length; i++) {
+            if(vowels.includes(str[i].toLowerCase())) {
+                document.getElementById("output").innerHTML = `
+                    String: ${str}&lt;br&gt;
+                    Left-most vowel: '${str[i]}'&lt;br&gt;
+                    Position: ${i + 1}
+                `;
+                return;
+            }
+        }
+        document.getElementById("output").innerHTML = "No vowels found";
+    }
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;button onclick="findVowelPosition()"&gt;Find Vowel Position&lt;/button&gt;
+    &lt;div id="output"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+
+  <h2>Task 1b: Reverse Number Digits</h2>
+  <div class="code-block">
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;script&gt;
+    function reverseNumber() {
+        let num = parseInt(prompt("Enter a number:"));
+        let reversed = 0;
+        
+        while(num > 0) {
+            reversed = reversed * 10 + (num % 10);
+            num = Math.floor(num / 10);
+        }
+        
+        document.getElementById("output").innerHTML = `Reversed: ${reversed}`;
+    }
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;button onclick="reverseNumber()"&gt;Reverse Number&lt;/button&gt;
+    &lt;div id="output"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+
+  <div class="execution">
+    <h3>How to Execute:</h3>
+    <ol>
+      <li>Copy the code for either Task 1a or 1b</li>
+      <li>Save as an HTML file (e.g., vowel.html or reverse.html)</li>
+      <li>Open the file in any web browser</li>
+      <li>Click the button and follow the prompts</li>
+    </ol>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Task 12 - Student Sorting</title>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .code {
+            background: #f0f0f0;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Task 12: PHP Student Sorting</h1>
+
+    <div class="code">
+        <pre>&lt;?php
+$conn = mysqli_connect("localhost","root","","student");
+$sql = "SELECT * FROM studentinfo";
+$result = mysqli_query($conn, $sql);
+$students = array();
+
+while($row = mysqli_fetch_assoc($result)) {
+    $students[$row['usn']] = $row;
+}
+
+// Selection sort
+$usns = array_keys($students);
+for($i=0;$i&lt;count($usns)-1;$i++) {
+    $min_idx = $i;
+    for($j=$i+1;$j&lt;count($usns);$j++) {
+        if($usns[$j] &lt; $usns[$min_idx]) $min_idx = $j;
+    }
+    $temp = $usns[$i];
+    $usns[$i] = $usns[$min_idx];
+    $usns[$min_idx] = $temp;
+}
+
+echo "&lt;table border='1'&gt;
+    &lt;tr&gt;&lt;th&gt;USN&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Address&lt;/th&gt;&lt;/tr&gt;";
+foreach($usns as $usn) {
+    echo "&lt;tr&gt;
+        &lt;td&gt;".$students[$usn]['usn']."&lt;/td&gt;
+        &lt;td&gt;".$students[$usn]['name']."&lt;/td&gt;
+        &lt;td&gt;".$students[$usn]['address']."&lt;/td&gt;
+    &lt;/tr&gt;";
+}
+echo "&lt;/table&gt;";
+?&gt;</pre>
+    </div>
+
+    <h3>Database Setup:</h3>
+    <pre>CREATE DATABASE student;
+USE student;
+CREATE TABLE studentinfo (
+    usn VARCHAR(20) PRIMARY KEY,
+    name VARCHAR(50),
+    address VARCHAR(100)
+);</pre>
+</body>
+
+</html>

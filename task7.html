@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Task 7 - AngularJS Shopping List</title>
+  <style>
+    body {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .code-block {
+      background: #f4f4f4;
+      padding: 15px;
+      border-left: 3px solid #3498db;
+    }
+
+    .execution {
+      background: #e8f4fc;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Task 7: AngularJS Shopping List</h1>
+
+  <div class="code-block">
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"&gt;&lt;/script&gt;
+&lt;body&gt;
+
+&lt;div ng-app="myShoppingList" ng-controller="myCtrl"&gt;
+  &lt;ul&gt;
+    &lt;li ng-repeat="x in products"&gt;{{x}} &lt;span ng-click="removeItem($index)"&gt;×&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;input ng-model="addMe"&gt;
+  &lt;button ng-click="addItem()"&gt;Add&lt;/button&gt;
+  &lt;p&gt;{{errortext}}&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = angular.module("myShoppingList", []);
+app.controller("myCtrl", function($scope) {
+    $scope.products = ["Milk", "Bread", "Cheese"];
+    $scope.addItem = function () {
+        $scope.errortext = "";
+        if (!$scope.addMe) {return;}
+        if ($scope.products.indexOf($scope.addMe) == -1) {
+            $scope.products.push($scope.addMe);
+        } else {
+            $scope.errortext = "Item already in list";
+        }
+    }
+    $scope.removeItem = function (x) {
+        $scope.errortext = "";        
+        $scope.products.splice(x, 1);
+    }
+});
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+
+  <div class="execution">
+    <h3>How to Execute:</h3>
+    <ol>
+      <li>Save as <code>task7.html</code></li>
+      <li>Open in browser</li>
+      <li>Features:
+        <ul>
+          <li>Pre-loaded items: Milk, Bread, Cheese</li>
+          <li>Add new items with input field</li>
+          <li>Click × to remove items</li>
+          <li>Error message for duplicates</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+</body>
+
+</html>

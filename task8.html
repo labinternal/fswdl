@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Task 8 - Mobile Details Servlet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .code-block {
+            background: #f4f4f4;
+            padding: 15px;
+            border-left: 3px solid #3498db;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        .execution {
+            background: #e8f4fc;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 30px;
+        }
+
+        .file-tabs {
+            display: flex;
+            margin-bottom: -1px;
+        }
+
+        .file-tab {
+            padding: 8px 15px;
+            background: #e0e0e0;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+
+        .file-tab.active {
+            background: #f4f4f4;
+            border-bottom: 1px solid #f4f4f4;
+        }
+
+        .file-content {
+            display: none;
+        }
+
+        .file-content.active {
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Task 8: Mobile Details Servlet</h1>
+
+    <h2>Complete Code:</h2>
+
+    <div class="file-tabs">
+        <div class="file-tab active" onclick="showFile('html')">index.html</div>
+        <div class="file-tab" onclick="showFile('java')">MobileDetails.java</div>
+        <div class="file-tab" onclick="showFile('xml')">web.xml</div>
+    </div>
+
+    <div id="html" class="file-content active">
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Mobile Details&lt;/title&gt;
+    &lt;style&gt;
+        fieldset {
+            width: 50%;
+            margin: 0 auto;
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        table {
+            margin: 20px auto;
+            width: 80%;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 100%;
+        }
+        input[type="submit"], input[type="reset"] {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form action="MobileDetails" method="post"&gt;
+        &lt;fieldset&gt;
+            &lt;h2&gt;Mobile Details Form&lt;/h2&gt;
+            &lt;hr&gt;
+            &lt;table&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Model Number:&lt;/td&gt;
+                    &lt;td&gt;&lt;input type="text" name="ModelId" required /&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Mobile Price:&lt;/td&gt;
+                    &lt;td&gt;&lt;input type="text" name="Price" required /&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Mobile Company:&lt;/td&gt;
+                    &lt;td&gt;&lt;input type="text" name="Company" required /&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Mobile Color:&lt;/td&gt;
+                    &lt;td&gt;&lt;input type="text" name="Color" required /&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;&lt;input type="reset" value="Reset"/&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;input type="submit" value="Register"/&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/table&gt;
+        &lt;/fieldset&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+    <div id="java" class="file-content">
+        <pre><code>package com.yourcompany.mobile;
+
+import java.io.*;
+import java.sql.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class MobileDetails extends HttpServlet {
+    
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        
+        String model = request.getParameter("ModelId");
+        int price = Integer.parseInt(request.getParameter("Price"));
+        String company = request.getParameter("Company");
+        String color = request.getParameter("Color");
+        
+        try {
+            // Load the driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            // Create connection
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/mobile", "root", "");
+            
+            // Insert record
+            PreparedStatement ps = con.prepareStatement(
+                "INSERT INTO MobileDetails VALUES (?, ?, ?, ?)");
+            ps.setString(1, model);
+            ps.setInt(2, price);
+            ps.setString(3, company);
+            ps.setString(4, color);
+            
+            int i = ps.executeUpdate();
+            if (i > 0) {
+                out.println("&lt;h3 style='color:green;'&gt;Record inserted successfully!&lt;/h3&gt;");
+            }
+            
+            // Display all records
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM MobileDetails");
+            
+            out.println("&lt;table border='1' style='width:80%; margin:20px auto; border-collapse:collapse;'&gt;");
+            out.println("&lt;caption&gt;&lt;h2&gt;Mobile Details&lt;/h2&gt;&lt;/caption&gt;");
+            out.println("&lt;tr style='background-color:#4CAF50; color:white;'&gt;");
+            out.println("&lt;th&gt;Model ID&lt;/th&gt;&lt;th&gt;Price (Rs.)&lt;/th&gt;&lt;th&gt;Company&lt;/th&gt;&lt;th&gt;Color&lt;/th&gt;&lt;/tr&gt;");
+            
+            while (rs.next()) {
+                out.println("&lt;tr style='background-color:#f2f2f2;'&gt;");
+                out.println("&lt;td&gt;" + rs.getString("ModelId") + "&lt;/td&gt;");
+                out.println("&lt;td&gt;" + rs.getInt("Price") + "&lt;/td&gt;");
+                out.println("&lt;td&gt;" + rs.getString("Company") + "&lt;/td&gt;");
+                out.println("&lt;td&gt;" + rs.getString("Color") + "&lt;/td&gt;");
+                out.println("&lt;/tr&gt;");
+            }
+            
+            out.println("&lt;/table&gt;");
+            out.println("&lt;div style='text-align:center;'&gt;&lt;a href='index.html'&gt;Back to Form&lt;/a&gt;&lt;/div&gt;");
+            
+            // Clean up
+            rs.close();
+            stmt.close();
+            ps.close();
+            con.close();
+            
+        } catch (Exception e) {
+            out.println("&lt;h3 style='color:red;'&gt;Error: " + e.getMessage() + "&lt;/h3&gt;");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+    </div>
+
+    <div id="xml" class="file-content">
+        <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0"&gt;
+    
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;MobileDetails&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;com.yourcompany.mobile.MobileDetails&lt;/servlet-class&gt;
+    &lt;/servlet&gt;
+    
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;MobileDetails&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/MobileDetails&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+    
+    &lt;welcome-file-list&gt;
+        &lt;welcome-file&gt;index.html&lt;/welcome-file&gt;
+    &lt;/welcome-file-list&gt;
+&lt;/web-app&gt;</code></pre>
+    </div>
+
+    <div class="execution">
+        <h3>How to Execute:</h3>
+        <ol>
+            <li><strong>Database Setup:</strong>
+                <pre>CREATE DATABASE mobile;
+USE mobile;
+
+CREATE TABLE MobileDetails (
+    ModelId VARCHAR(20) PRIMARY KEY,
+    Price INT,
+    Company VARCHAR(50),
+    Color VARCHAR(30)
+);</pre>
+            </li>
+            <li><strong>Project Setup:</strong>
+                <ul>
+                    <li>Create a new Maven Web Project in your IDE</li>
+                    <li>Add MySQL JDBC dependency to pom.xml</li>
+                </ul>
+            </li>
+            <li><strong>File Placement:</strong>
+                <ul>
+                    <li>Place index.html in webapp folder</li>
+                    <li>Create MobileDetails.java in src/main/java/com/yourcompany/mobile/</li>
+                    <li>Place web.xml in WEB-INF folder</li>
+                </ul>
+            </li>
+            <li><strong>Deployment:</strong>
+                <ul>
+                    <li>Build and deploy to Tomcat server</li>
+                    <li>Access via http://localhost:8080/your-project/</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <script>
+        function showFile(fileId) {
+            // Hide all file contents
+            document.querySelectorAll('.file-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Deactivate all tabs
+            document.querySelectorAll('.file-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Activate selected tab and content
+            document.getElementById(fileId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

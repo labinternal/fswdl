@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Task 3 - Text Animation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .code-block {
+      background: #f4f4f4;
+      padding: 15px;
+      border-left: 3px solid #3498db;
+      overflow-x: auto;
+    }
+
+    .execution {
+      background: #e8f4fc;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    #text-container {
+      text-align: center;
+      margin: 30px 0;
+      min-height: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Task 3: Text Animation</h1>
+
+  <h2>Working Demo:</h2>
+  <div id="text-container"></div>
+
+  <h2>Complete Code:</h2>
+  <div class="code-block">
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Text Growing/Shrinking&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            transition: font-size 0.1s;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="text-container"&gt;&lt;/div&gt;
+    
+    &lt;script&gt;
+        let size = 5;
+        let growing = true;
+        let text = "TEXT-GROWING";
+        const container = document.getElementById('text-container');
+        
+        function animateText() {
+            if (growing) {
+                size += 5;
+                container.innerHTML = `&lt;h1 style="color: red;"&gt;${text}&lt;/h1&gt;`;
+                
+                if (size >= 50) {
+                    growing = false;
+                    text = "TEXT-SHRINKING";
+                }
+            } else {
+                size -= 5;
+                container.innerHTML = `&lt;h1 style="color: blue;"&gt;${text}&lt;/h1&gt;`;
+                
+                if (size <= 5) {
+                    growing = true;
+                    text = "TEXT-GROWING";
+                }
+            }
+            
+            container.firstChild.style.fontSize = `${size}pt`;
+            setTimeout(animateText, 100);
+        }
+        
+        animateText();
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+
+  <div class="execution">
+    <h3>How to Execute:</h3>
+    <ol>
+      <li>Copy the entire code block above</li>
+      <li>Save as an HTML file (e.g., text-animation.html)</li>
+      <li>Open the file in any web browser</li>
+      <li>The animation will start automatically</li>
+    </ol>
+  </div>
+
+  <script>
+    // Embedded demo
+    let size = 5;
+    let growing = true;
+    let text = "TEXT-GROWING";
+    const container = document.getElementById('text-container');
+
+    function animateText() {
+      if (growing) {
+        size += 5;
+        container.innerHTML = `<h1 style="color: red;">${text}</h1>`;
+
+        if (size >= 50) {
+          growing = false;
+          text = "TEXT-SHRINKING";
+        }
+      } else {
+        size -= 5;
+        container.innerHTML = `<h1 style="color: blue;">${text}</h1>`;
+
+        if (size <= 5) {
+          growing = true;
+          text = "TEXT-GROWING";
+        }
+      }
+
+      container.firstChild.style.fontSize = `${size}pt`;
+      setTimeout(animateText, 100);
+    }
+
+    animateText();
+  </script>
+</body>
+
+</html>

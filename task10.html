@@ -1,73 +1,118 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Task 10 - PHP Calculator</title>
+    <title>Task 10 Combined Code</title>
     <style>
-        body {
-            font-family: Arial;
-            max-width: 800px;
-            margin: 0 auto;
+        pre {
+            background: #f4f4f4;
             padding: 20px;
-        }
-
-        .code {
-            background: #f0f0f0;
-            padding: 15px;
             border-left: 4px solid #3498db;
+            white-space: pre-wrap;
+            font-family: monospace;
+            margin: 20px 0;
         }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; }
     </style>
 </head>
-
 <body>
-    <h1>Task 10: PHP Calculator</h1>
+    <h1>Task 10 not working </h1>
 
-    <div class="code">
-        <pre>&lt;html&gt;
+    <!-- Task 10a: Calculator -->
+    <img src="task10a.png">
+    <div>
+        <h2>Part 10a: Simple Calculator</h2>
+        <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
 &lt;head&gt;
-&lt;style&gt;
-    table,td,th { border:1px solid black; width:35%; background-color:lightgreen; }
-    table { margin:auto; }
-    input,p { text-align:right; color:blue; }
-&lt;/style&gt;
+    &lt;style&gt;
+        table, td, th { border: 1px solid black; width: 35%; text-align: center; background-color: lightgreen; }
+        table { margin: auto; }
+        input, p { text-align: right; color: blue; }
+    &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;form method="post"&gt;
-&lt;table&gt;
-    &lt;caption&gt;&lt;h2&gt;SIMPLE CALCULATOR&lt;/h2&gt;&lt;/caption&gt;
-    &lt;tr&gt;
-        &lt;td&gt;First Number:&lt;/td&gt;
-        &lt;td&gt;&lt;input type="text" name="num1"&gt;&lt;/td&gt;
-        &lt;td rowspan="2"&gt;&lt;button type="submit" name="submit"&gt;Calculate&lt;/button&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;Second Number:&lt;/td&gt;
-        &lt;td&gt;&lt;input type="text" name="num2"&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;?php
-    if(isset($_POST['submit'])) {
-        $num1 = $_POST['num1'];
-        $num2 = $_POST['num2'];
-        if(is_numeric($num1) && is_numeric($num2)) {
-            echo "&lt;tr&gt;&lt;td&gt;Addition:&lt;/td&gt;&lt;td&gt;&lt;p&gt;".($num1+$num2)."&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;";
-            echo "&lt;tr&gt;&lt;td&gt;Subtraction:&lt;/td&gt;&lt;td&gt;&lt;p&gt;".($num1-$num2)."&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;";
-            echo "&lt;tr&gt;&lt;td&gt;Multiplication:&lt;/td&gt;&lt;td&gt;&lt;p&gt;".($num1*$num2)."&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;";
-            echo "&lt;tr&gt;&lt;td&gt;Division:&lt;/td&gt;&lt;td&gt;&lt;p&gt;".($num1/$num2)."&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;";
-        }
-    }
-    ?&gt;
-&lt;/table&gt;
-&lt;/form&gt;
+    &lt;form method=&quot;post&quot;&gt;
+        &lt;table&gt;
+            &lt;caption&gt;&lt;h2&gt;SIMPLE CALCULATOR&lt;/h2&gt;&lt;/caption&gt;
+            &lt;tr&gt;
+                &lt;td&gt;First Number:&lt;/td&gt;
+                &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;num1&quot;&gt;&lt;/td&gt;
+                &lt;td rowspan=&quot;2&quot;&gt;&lt;button type=&quot;submit&quot; name=&quot;submit&quot;&gt;Calculate&lt;/button&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Second Number:&lt;/td&gt;
+                &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;num2&quot;&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;?php
+            if(isset($_POST[&#39;submit&#39;])) {
+                $num1 = $_POST[&#39;num1&#39;];
+                $num2 = $_POST[&#39;num2&#39;];
+                if(is_numeric($num1) &amp;&amp; is_numeric($num2)) {
+                    echo &quot;&lt;tr&gt;&lt;td&gt;Addition:&lt;/td&gt;&lt;td&gt;&lt;p&gt;&quot;.($num1+$num2).&quot;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&quot;;
+                    echo &quot;&lt;tr&gt;&lt;td&gt;Subtraction:&lt;/td&gt;&lt;td&gt;&lt;p&gt;&quot;.($num1-$num2).&quot;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&quot;;
+                    echo &quot;&lt;tr&gt;&lt;td&gt;Multiplication:&lt;/td&gt;&lt;td&gt;&lt;p&gt;&quot;.($num1*$num2).&quot;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&quot;;
+                    echo &quot;&lt;tr&gt;&lt;td&gt;Division:&lt;/td&gt;&lt;td&gt;&lt;p&gt;&quot;.($num1/$num2).&quot;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&quot;;
+                }
+            }
+            ?&gt;
+        &lt;/table&gt;
+    &lt;/form&gt;
 &lt;/body&gt;
-&lt;/html&gt;</pre>
+&lt;/html&gt;
+        </pre>
     </div>
 
-    <h3>Run:</h3>
-    <ol>
-        <li>Save as <code>calculator.php</code></li>
-        <li>Place in XAMPP htdocs</li>
-        <li>Access via <code>http://localhost/calculator.php</code></li>
-    </ol>
-</body>
+    <!-- Task 10b: Matrix Operations -->
+    <div>
+        <h2>Part 10b-d: Matrix Operations</h2>
+        <img src="task10b.png">
+        <pre>
+&lt;?php
+function pr($matrix) {
+    for($i=0; $i&lt;3; $i++) {
+        for($j=0; $j&lt;3; $j++) {
+            echo $matrix[$i][$j].&quot; &quot;;
+        }
+        echo &quot;&lt;br&gt;&quot;;
+    }
+    echo &quot;&lt;br&gt;&quot;;
+}
 
+$a = [[1,1,3],[4,5,6],[7,8,9]];
+$b = [[6,8,9],[4,5,6],[4,2,3]];
+
+echo &quot;&lt;b&gt;First Matrix:&lt;/b&gt;&lt;br&gt;&quot;; pr($a);
+echo &quot;&lt;b&gt;Second Matrix:&lt;/b&gt;&lt;br&gt;&quot;; pr($b);
+
+// Transpose
+for($i=0; $i&lt;3; $i++) {
+    for($j=0; $j&lt;3; $j++) {
+        $c[$i][$j] = $a[$j][$i];
+    }
+}
+echo &quot;&lt;b&gt;Transpose of First Matrix:&lt;/b&gt;&lt;br&gt;&quot;; pr($c);
+
+// Addition
+for($i=0; $i&lt;3; $i++) {
+    for($j=0; $j&lt;3; $j++) {
+        $c[$i][$j] = $a[$i][$j] + $b[$i][$j];
+    }
+}
+echo &quot;&lt;b&gt;Matrix Addition:&lt;/b&gt;&lt;br&gt;&quot;; pr($c);
+
+// Multiplication
+for($i=0; $i&lt;3; $i++) {
+    for($j=0; $j&lt;3; $j++) {
+        $c[$i][$j] = 0;
+        for($k=0; $k&lt;3; $k++) {
+            $c[$i][$j] += $a[$i][$k] * $b[$k][$j];
+        }
+    }
+}
+echo &quot;&lt;b&gt;Matrix Multiplication:&lt;/b&gt;&lt;br&gt;&quot;; pr($c);
+?&gt;
+        </pre>
+    </div>
+</body>
 </html>
